@@ -1,17 +1,25 @@
 package ru.stqa.learn.addressbook;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
-
-public class GoupCreationTests {
+public class TestBase {
     FirefoxDriver wd;
+
+    public static boolean isAlertPresent(FirefoxDriver wd) {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -31,24 +39,15 @@ public class GoupCreationTests {
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
     }
 
-    @Test
-    public void testGoupCreationTests() {
-        gotoGroupPage();
-        initGroupCreation();
-        fillGroupForm(new GroupDate("test1", "test2", "test3"));
-        submitGroupCreation();
-        returnToGroupPage();
-    }
-
-    private void returnToGroupPage() {
+    protected void returnToGroupPage() {
         wd.findElement(By.linkText("group page")).click();
     }
 
-    private void submitGroupCreation() {
+    protected void submitGroupCreation() {
         wd.findElement(By.name("submit")).click();
     }
 
-    private void fillGroupForm(GroupDate groupDate) {
+    protected void fillGroupForm(GroupDate groupDate) {
         wd.findElement(By.name("group_name")).click();
         wd.findElement(By.name("group_name")).clear();
         wd.findElement(By.name("group_name")).sendKeys(groupDate.getName());
@@ -60,11 +59,11 @@ public class GoupCreationTests {
         wd.findElement(By.name("group_footer")).sendKeys(groupDate.getFooter());
     }
 
-    private void initGroupCreation() {
+    protected void initGroupCreation() {
         wd.findElement(By.name("new")).click();
     }
 
-    private void gotoGroupPage() {
+    protected void gotoGroupPage() {
         wd.findElement(By.linkText("groups")).click();
     }
 
@@ -73,12 +72,11 @@ public class GoupCreationTests {
         wd.quit();
     }
 
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
+    protected void deleteSelectedGroups() {
+        wd.findElement(By.name("delete")).click();
+    }
+
+    protected void selectGroup() {
+        wd.findElement(By.name("selected[]")).click();
     }
 }
