@@ -25,8 +25,8 @@ public class ContactHelper extends HelperBase {
         type(By.name("nickname"), contactData.getNickName());
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("email"), contactData.getEmail());
-        click(By.xpath("//select[@name='bday']//option[.=\"" + contactData.getBday() + "\"]"));
-        click(By.xpath("//select[@name='bmonth']//option[.=\"" + contactData.getBmonth() + "\"]"));
+        new Select(wd.findElement(By.name("bday"))).selectByVisibleText(String.valueOf(contactData.getBday()));
+        new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
         type(By.name("byear"), String.valueOf(contactData.getByYear()));
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -61,5 +61,16 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactModification() {
         click(By.xpath("//input[@value=\"Update\"]"));
+    }
+
+    public void createContact(ContactData contact,boolean creation) {
+        initContactCreation();
+        fillContactForm(contact, creation);
+        submitContactCreation();
+        returnToContactPage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
