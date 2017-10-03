@@ -2,7 +2,6 @@ package ru.stqa.learn.addressbook.tests;
 
 import org.testng.annotations.Test;
 import ru.stqa.learn.addressbook.model.ContactData;
-import ru.stqa.learn.addressbook.model.GroupData;
 
 public class ContactModificationTest extends TestBase {
 

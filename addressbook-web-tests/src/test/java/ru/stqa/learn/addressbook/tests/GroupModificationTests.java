@@ -3,7 +3,7 @@ package ru.stqa.learn.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.learn.addressbook.model.GroupData;
 
-public class GroupModificationTest extends TestBase {
+public class GroupModificationTests extends TestBase {
 
     @Test
     public void testGroupModification() {
