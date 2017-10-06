@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 
 import java.util.Objects;
@@ -30,12 +31,17 @@ public class ApplicationManager {
         } else if (Objects.equals(browser, BrowserType.CHROME)) {
             wd = new ChromeDriver();
         } else if (Objects.equals(browser, BrowserType.IE)) {
-            wd = new InternetExplorerDriver();
+            DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+            ieCapabilities.setCapability(
+                    InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
+                    true
+            );
+            wd = new InternetExplorerDriver(ieCapabilities);
         }
 
 
-        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/group.php");
+        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        wd.get("http://localhost/addressbook");
         groupHelper = new GroupHelper(wd);
         contactHelper = new ContactHelper(wd);
         navigationHelper = new NavigationHelper(wd);
