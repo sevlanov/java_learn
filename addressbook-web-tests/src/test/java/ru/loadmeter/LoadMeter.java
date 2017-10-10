@@ -1,5 +1,6 @@
 package ru.loadmeter;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -43,9 +44,6 @@ public class LoadMeter {
         if (Objects.equals(browser, BrowserType.FIREFOX)) {
             wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
         } else if (Objects.equals(browser, BrowserType.CHROME)) {
-
-
-
             wd = new ChromeDriver(desiredCapabilities);
         } else if (Objects.equals(browser, BrowserType.IE)) {
             wd = new InternetExplorerDriver();
@@ -57,19 +55,27 @@ public class LoadMeter {
         wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx");
 
         long timeSpent = System.currentTimeMillis() - startTime;
+        //wd.wait(1);
+        wd.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        String str = wd.findElement(By.id("button-1046-btnEl")).getText();
+        long timeSpentEl = System.currentTimeMillis() - startTime;
+
         Logs loggs = wd.manage().logs();
-
         LogEntries logEntries = loggs.get(LogType.PERFORMANCE);
-
         for (LogEntry logEntry : logEntries) {
             System.out.println("Time: " + String.format("%tF %<tT.%<tL", logEntry.getTimestamp() ) + "(" + logEntry.getTimestamp() + ") Log: " + logEntry.getMessage());
         }
+
+
 
        // for (LogEntry entry : wd.manage().logs().get(LogType.PERFORMANCE)) {
        //     System.out.println(entry.toString());
        // }
         System.out.println("Time load " + timeSpent);
-        wd.close();
+        System.out.println("Time load " + str + ": " + timeSpentEl);
+
+
+      //  wd.close();
 
     }
 }

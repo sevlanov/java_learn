@@ -1,9 +1,6 @@
 package ru.stqa.learn.addressbook.model;
 
 public class GroupData {
-    public void setId(int id) {
-        this.id = id;
-    }
 
     private int id;
     private final String name;
@@ -13,7 +10,9 @@ public class GroupData {
     public int getId() {
         return id;
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public GroupData(String name, String header, String footer) {
         this.id = Integer.MAX_VALUE;
@@ -28,6 +27,14 @@ public class GroupData {
         this.name = name;
         this.header = header;
         this.footer = footer;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public String getFooter() {
+        return footer;
     }
 
     @Override
@@ -49,15 +56,6 @@ public class GroupData {
         return name;
 
     }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public String getFooter() {
-        return footer;
-    }
-
     @Override
     public String toString() {
         return "GroupData{" +
