@@ -8,9 +8,9 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion() {
-        app.getNavigationHelper().gotoContactPage();
+        app.goTo().gotoContactPage();
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Name", "Surname",
                     "TrueNick", "8(908)778-80-25", "test@mail.ru", 11,
