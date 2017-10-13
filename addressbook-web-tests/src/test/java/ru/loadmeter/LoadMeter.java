@@ -57,7 +57,13 @@ public class LoadMeter {
         long timeSpent = System.currentTimeMillis() - startTime;
         //wd.wait(1);
         wd.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-        String str = wd.findElement(By.id("button-1046-btnEl")).getText();
+        wd.switchTo().frame("contentIFrame0");
+        wd.switchTo().frame("IFRAME_LegalCustomerSearchArea");
+        wd.findElement(By.id("NameOnLegalCustomerSearchViewportTextField-inputEl")).sendKeys("Бора-Бора");
+        wd.findElement(By.id("SearchOnLegalCustomerSearchViewportButton")).click();
+        String str = wd.findElement(By.id("button-1046")).getText();
+        System.out.println(str);
+        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx");
         long timeSpentEl = System.currentTimeMillis() - startTime;
 
         Logs loggs = wd.manage().logs();

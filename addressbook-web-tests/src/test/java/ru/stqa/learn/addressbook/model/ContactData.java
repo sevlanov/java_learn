@@ -1,7 +1,7 @@
 package ru.stqa.learn.addressbook.model;
 
 public class ContactData {
-    private int id;
+    private int id = Integer.MAX_VALUE;
     private String firstName;
     private String lastName;
     private String nickName;
@@ -12,42 +12,58 @@ public class ContactData {
     private int byYear;
     private String group;
 
-    public ContactData(String firstName, String lastName, String nickName, String mobile, String email, int bday,
-                       String bmonth, int byYear, String group) {
-        this.id = Integer.MAX_VALUE;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.mobile = mobile;
-        this.email = email;
-        this.bday = bday;
-        this.bmonth = bmonth;
-        this.byYear = byYear;
-        this.group = group;
-    }
-
-
-    public ContactData(int id, String firstName, String lastName, String nickName, String mobile, String email, int bday,
-                       String bmonth, int byYear, String group) {
-        this.id = id;
-        this.firstName = firstName;
-
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.mobile = mobile;
-        this.email = email;
-        this.bday = bday;
-        this.bmonth = bmonth;
-        this.byYear = byYear;
-        this.group = group;
-    }
-
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withNickName(String nickName) {
+        this.nickName = nickName;
+        return this;
+    }
+
+    public ContactData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withBday(int bday) {
+        this.bday = bday;
+        return this;
+    }
+
+    public ContactData withBmonth(String bmonth) {
+        this.bmonth = bmonth;
+        return this;
+    }
+
+    public ContactData withByYear(int byYear) {
+        this.byYear = byYear;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
     }
 
     public String getFirstName() {
@@ -93,6 +109,7 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
+        if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
     }

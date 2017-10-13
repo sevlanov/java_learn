@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.learn.addressbook.model.ContactData;
+import ru.stqa.learn.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,9 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
     public void deleteSelectedContacts() {
         click(By.xpath("//input[@value=\"Delete\"]"));
     }
@@ -58,17 +62,36 @@ public class ContactHelper extends HelperBase {
 
     public void initContactModification(int index) {
         wd.findElements(By.xpath("//a[./img[@title=\"Edit\"]]")).get(index).click();
-      //  click(By.xpath("//a[./img[@title=\"Edit\"]]"));
+    }
+    private void initContactModificationById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
     }
 
     public void submitContactModification() {
         click(By.xpath("//input[@value=\"Update\"]"));
     }
 
-    public void createContact(ContactData contact,boolean creation) {
+    public void create(ContactData contact, boolean creation) {
         initContactCreation();
         fillContactForm(contact, creation);
         submitContactCreation();
+        contactCache = null;
+        returnToContactPage();
+    }
+
+    public void modify(ContactData contact) {
+        initContactModificationById(contact.getId());
+        fillContactForm(contact, false);
+        submitContactModification();
+        contactCache = null;
+        returnToContactPage();
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        deleteSelectedContacts();
+        alertOk();
+        contactCache = null;
         returnToContactPage();
     }
 
@@ -76,21 +99,23 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getContactCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    private  Contacts contactCache = null;
+    public Contacts all() {
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']"));
         for (WebElement element : elements) {
             String name = element.findElement(By.xpath("td[3]")).getText();
             String surname = element.findElement(By.xpath("td[2]")).getText();
-            int id = Integer.parseInt(element.findElement(By.xpath("td[1]/input")).getAttribute("value"));
-            ContactData contact = new ContactData(id,name, surname, null, null, null,
-                    0, null, 0, null);
-            contacts.add(contact);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            contactCache.add(new ContactData().withId(id).withFirstName(name).withLastName(surname));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 }

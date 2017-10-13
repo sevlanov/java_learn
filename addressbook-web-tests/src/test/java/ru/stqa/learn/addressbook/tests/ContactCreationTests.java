@@ -1,29 +1,39 @@
 package ru.stqa.learn.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.learn.addressbook.model.ContactData;
+import ru.stqa.learn.addressbook.model.Contacts;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test(enabled = false)
+    @Test
     public void testContactCreation() {
-        app.goTo().gotoContactPage();
-        List<ContactData> before = app.getContactHelper().getContactList();
-        ContactData contact = new ContactData("Name", "Surname",
-                "TrueNick", "8(908)778-80-25", "test@mail.ru", 11,
-                "April", 1955, "test1");
-        app.getContactHelper().createContact(contact, true);
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size() + 1);
-
-        before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);
+        app.goTo().contactPage();
+        Contacts before = app.contact().all();
+        ContactData contact = new ContactData().withFirstName("Name").withLastName("Surname")
+                .withNickName("TrueNick").withMobile("8(908)778-80-25").withEmail("test@mail.ru").withBday(11)
+                .withBmonth("April").withByYear(1955).withGroup("test1");
+        app.contact().create(contact, true);
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
+        Contacts after = app.contact().all();
+        assertThat(after, equalTo(
+                before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+    }
+    @Test
+    public void testBadContactCreation() {
+        app.goTo().contactPage();
+        Contacts before = app.contact().all();
+        ContactData contact = new ContactData().withFirstName("Name'").withLastName("Surname")
+                .withNickName("TrueNick").withMobile("8(908)778-80-25").withEmail("test@mail.ru").withBday(11)
+                .withBmonth("April").withByYear(1955).withGroup("test1");
+        app.contact().create(contact, true);
+        assertThat(app.contact().count(), equalTo(before.size()));
+        Contacts after = app.contact().all();
+        contact.withFirstName("Name"); // Изменяем имя в соответствии с логикой приложения: "удаление символа ' при соранении имени"
+        assertThat(after, equalTo(
+                before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 }
