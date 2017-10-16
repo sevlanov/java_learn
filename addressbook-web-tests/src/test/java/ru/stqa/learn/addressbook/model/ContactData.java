@@ -5,17 +5,34 @@ public class ContactData {
     private String firstName;
     private String lastName;
     private String nickName;
-    private String mobile;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
     private String email;
+    private String email2;
+    private String email3;
     private int bday;
     private String bmonth;
     private int byYear;
     private String group;
+    private String address;
+    private String allPhones;
+    private String allEmails;
 
-    public int getId() {
-        return id;
+    public ContactData withHome(String home) {
+        this.homePhone = home;
+        return this;
     }
 
+    public ContactData withWork(String work) {
+        this.workPhone = work;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
     public ContactData withId(int id) {
         this.id = id;
         return this;
@@ -37,12 +54,22 @@ public class ContactData {
     }
 
     public ContactData withMobile(String mobile) {
-        this.mobile = mobile;
+        this.mobilePhone = mobile;
         return this;
     }
 
     public ContactData withEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
         return this;
     }
 
@@ -66,6 +93,20 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -78,12 +119,32 @@ public class ContactData {
         return nickName;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
     }
 
     public int getBday() {
@@ -100,6 +161,14 @@ public class ContactData {
 
     public String getGroup() {
         return group;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
     }
 
     @Override
@@ -129,4 +198,6 @@ public class ContactData {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
+
+
 }
