@@ -11,6 +11,13 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -20,7 +27,7 @@ public class LoadMeter {
     WebDriver wd;
 
     @Test
-    public void loadTime() {
+    public void loadTime() throws IOException {
 
         LoggingPreferences logs = new LoggingPreferences();
         logs.enable(LogType.BROWSER, Level.OFF);
@@ -55,30 +62,48 @@ public class LoadMeter {
         wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx");
 
         long timeSpent = System.currentTimeMillis() - startTime;
-        //wd.wait(1);
-        wd.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+
+       // wd.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
         wd.switchTo().frame("contentIFrame0");
         wd.switchTo().frame("IFRAME_LegalCustomerSearchArea");
-        wd.findElement(By.id("NameOnLegalCustomerSearchViewportTextField-inputEl")).sendKeys("Бора-Бора");
-        wd.findElement(By.id("SearchOnLegalCustomerSearchViewportButton")).click();
+       // wd.findElement(By.id("NameOnLegalCustomerSearchViewportTextField-inputEl")).sendKeys("Бора-Бора");
+       // wd.findElement(By.id("SearchOnLegalCustomerSearchViewportButton")).click();
         String str = wd.findElement(By.id("button-1046")).getText();
         System.out.println(str);
-        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx");
+
         long timeSpentEl = System.currentTimeMillis() - startTime;
 
+        File file = new File(String.format("log%s.txt", LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYYMMdd_HHmm"))));
+        Writer writer = null;
+        try {
+            writer = new FileWriter(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        writer.write("Log1 start\n");
         Logs loggs = wd.manage().logs();
         LogEntries logEntries = loggs.get(LogType.PERFORMANCE);
         for (LogEntry logEntry : logEntries) {
-            System.out.println("Time: " + String.format("%tF %<tT.%<tL", logEntry.getTimestamp() ) + "(" + logEntry.getTimestamp() + ") Log: " + logEntry.getMessage());
+            writer.write("Time: " + String.format("%tF %<tT.%<tL", logEntry.getTimestamp() ) + "(" + logEntry.getTimestamp() + ") Log: " + logEntry.getMessage() + "\n");
         }
+        writer.write("Log1 over\n");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx");
 
 
-
-       // for (LogEntry entry : wd.manage().logs().get(LogType.PERFORMANCE)) {
-       //     System.out.println(entry.toString());
-       // }
-        System.out.println("Time load " + timeSpent);
-        System.out.println("Time load " + str + ": " + timeSpentEl);
+        loggs = wd.manage().logs();
+        logEntries = loggs.get(LogType.PERFORMANCE);
+        for (LogEntry logEntry : logEntries) {
+            writer.write("Time: " + String.format("%tF %<tT.%<tL", logEntry.getTimestamp() ) + "(" + logEntry.getTimestamp() + ") Log: " + logEntry.getMessage() + "\n");
+        }
+        writer.write("Time load " + timeSpent + "\n");
+        writer.write("Time load " + str + ": " + timeSpentEl + "\n");
+        writer.close();
 
 
       //  wd.close();

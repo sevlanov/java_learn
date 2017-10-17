@@ -1,5 +1,7 @@
 package ru.stqa.learn.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String firstName;
@@ -18,6 +20,14 @@ public class ContactData {
     private String address;
     private String allPhones;
     private String allEmails;
+    private File photo;
+
+
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
 
     public ContactData withHome(String home) {
         this.homePhone = home;
@@ -171,6 +181,9 @@ public class ContactData {
         return allEmails;
     }
 
+    public File getPhoto() {
+        return photo;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
