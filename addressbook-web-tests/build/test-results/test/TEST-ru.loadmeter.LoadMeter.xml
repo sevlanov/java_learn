@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.loadmeter.LoadMeter" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-10-17T14:48:46" hostname="WSRU-CRM-008" time="23.098">
+  <properties/>
+  <testcase name="loadTime" classname="ru.loadmeter.LoadMeter" time="23.098"/>
+  <system-out><![CDATA[Сброс параметров
+]]></system-out>
+  <system-err><![CDATA[Starting ChromeDriver 2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a) on port 15424
+Only local connections are allowed.
+[0.529][WARNING]: Ignoring unrecognized log type: client
+[0.529][WARNING]: Ignoring unrecognized log type: server
+окт. 17, 2017 5:48:48 ПП org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+]]></system-err>
+</testsuite>
