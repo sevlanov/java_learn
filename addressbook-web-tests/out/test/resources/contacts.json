@@ -5,7 +5,7 @@
     "nickName": "TrueNick 0",
     "mobilePhone": "8(908)770-52-20",
     "email": "test0@mail.ru",
-    "bday": 0,
+    "bday": 1,
     "bmonth": "April",
     "byYear": 1955,
     "group": "test1"
@@ -16,7 +16,7 @@
     "nickName": "TrueNick 1",
     "mobilePhone": "8(908)770-52-21",
     "email": "test1@mail.ru",
-    "bday": 1,
+    "bday": 2,
     "bmonth": "April",
     "byYear": 1956,
     "group": "test1"
@@ -27,7 +27,7 @@
     "nickName": "TrueNick 2",
     "mobilePhone": "8(908)770-52-22",
     "email": "test2@mail.ru",
-    "bday": 2,
+    "bday": 3,
     "bmonth": "April",
     "byYear": 1957,
     "group": "test1"
