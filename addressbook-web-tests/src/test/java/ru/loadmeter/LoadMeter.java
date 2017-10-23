@@ -210,6 +210,108 @@ public class LoadMeter {
         wd.close();
     }
 
+
+    @Test(enabled = true)
+    public void testEmailSendIE() throws IOException {
+
+        DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+/*
+        ieCapabilities.setCapability("nativeEvents", true);
+        ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
+        ieCapabilities.setCapability("ignoreProtectedModeSettings", true);
+        ieCapabilities.setCapability("disable-popup-blocking", true);
+        ieCapabilities.setCapability("enablePersistentHover", true);
+        ieCapabilities.setCapability("ignoreZoomSetting", true);*/
+       /* {acceptInsecureCerts=false, browserVersion=11,
+                se:ieOptions={nativeEvents=true, browserAttachTimeout=0.0,
+                ie.ensureCleanSession=true, elementScrollBehavior=0.0,
+                enablePersistentHover=false, ie.browserCommandLineSwitches=,
+                ie.forceCreateProcessApi=false, requireWindowFocus=false,
+                initialBrowserUrl=http://localhost:35423/,*/
+            // ignoreZoomSetting=false,
+            // ie.fileUploadDialogTimeout=3000.0,
+            // ignoreProtectedModeSettings=true}, browserName=internet explorer,
+        // pageLoadStrategy=normal, javascriptEnabled=true, platformName=windows,
+        // setWindowRect=true, platform=ANY}]
+
+        ieCapabilities.setCapability("nativeEvents", true);
+        ieCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+        ieCapabilities.setCapability("enablePersistentHover", false);
+        ieCapabilities.setCapability("forceCreateProcessApi", false);
+        ieCapabilities.setCapability("requireWindowFocus", false);
+        ieCapabilities.setCapability("ignoreZoomSetting", false);
+        ieCapabilities.setCapability("ignoreProtectedModeSettings", true);
+
+        /*
+        ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+        ieCapabilities.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR,  "accept");
+        ieCapabilities.setCapability("enablePersistentHover", true);
+        ieCapabilities.setCapability("requireWindowFocus", false);
+        ieCapabilities.setCapability("disable-popup-blocking", true);
+        ieCapabilities.setCapability("nativeEvents", false);
+        ieCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+        ieCapabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);*/
+        wd = new InternetExplorerDriver(ieCapabilities);
+        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx?histKey=17464702&newWindow=true&etn=email&pagetype=entityrecord&navbar=off&id=7484ec13-88b5-e711-80e8-001dd8b71c7e&extraqs=#960040699");
+        //wd.findElement(By.id("button-1023")).sendKeys(org.openqa.selenium.Keys.CONTROL);
+        try{
+            Thread.sleep(500);
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        wd.switchTo().defaultContent();// .frame("contentIFrame0");
+        //wd.findElement(By.id("email|NoRelationship|Form|gm.email.Button2.Button")).click();//.sendKeys(Keys.RETURN);
+        wd.findElement(By.xpath(".//a[contains(@class, 'Menu') and ./span[text()=' Отправить ']]")).click();
+        System.out.println("click");
+        try{
+            Thread.sleep(10000);
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        System.out.println("end sleep");
+        /*
+        try{
+            Thread.sleep(2000); // Задержка для того, чтобы окно с предложением сохранить файл открылось
+            Robot robot=new Robot();
+
+            robot.setAutoDelay(80);
+            robot.setAutoWaitForIdle(true);
+            int keyCode = 67; // Код буквы "с" (русская раскладка) для того, чтобы закрыть окно с сохранением вложения (Alt + с)
+            // В англоязычнов браузере необходимо изменить на другой код буквы. Должно подойти KeyEvent.VK_S
+
+            // Блок шагов перед переключением раскладки, для того, чтобы раскладка переключилась в правильном окне.
+            // Актуально только для русской версии браузера с английским языком по умолчанию в системе
+            // Не актуально для  браузера на виртуалке
+            robot.keyPress(KeyEvent.VK_ALT);
+            robot.keyPress(keyCode);
+            robot.keyRelease(KeyEvent.VK_ALT);
+            robot.keyRelease(keyCode);
+
+            // Блок переключения раскладки (Alt + Shift).
+            // Не актуально для  браузера на виртуалке
+            robot.keyPress(KeyEvent.VK_ALT);
+            robot.keyPress(KeyEvent.VK_SHIFT);
+            robot.keyRelease(KeyEvent.VK_ALT);
+            robot.keyRelease(KeyEvent.VK_SHIFT);
+
+            // Блок закрытия окна с сохранением вложения (Alt + с)
+            // Для корректной работы в настройках отключить уведомление об успешном окончании скачивания файлов
+            robot.keyPress(KeyEvent.VK_ALT);
+            robot.keyPress(keyCode);
+            robot.keyRelease(KeyEvent.VK_ALT);
+            robot.keyRelease(keyCode);
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        */
+
+      //  System.out.println(wd.findElement(By.id("button-1023")).getText());
+      //  wd.close();
+    }
+
     @Test(enabled = false)
     public void windowsSendKey() throws IOException {
 /*
