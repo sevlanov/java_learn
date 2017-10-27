@@ -12,9 +12,13 @@ dependencies {
     compile 'com.thoughtworks.xstream:xstream:1.4.8'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'mysql:mysql-connector-java:8.0.8-dmr'
+    compile 'org.hibernate:hibernate-core:5.2.11.Final'
+
 }
 
 task testGroups(type: Test) {
+
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }
@@ -24,8 +28,15 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
 }
 task testContacts(type: Test) {
+    if (executable == java9.java) {
+        jvmArgs += ['--add-opens', 'java.base/java.lang=ALL-UNNAMED']
+        jvmArgs += ['--add-modules', 'java.se.ee']
+    }
     useTestNG {
         suites 'src/test/resources/testng-contacts.xml'
     }
@@ -34,5 +45,8 @@ task testContacts(type: Test) {
     }
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }

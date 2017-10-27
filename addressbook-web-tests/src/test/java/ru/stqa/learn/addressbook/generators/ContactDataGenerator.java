@@ -73,9 +73,9 @@ public class ContactDataGenerator {
         System.out.println(new File(".").getAbsolutePath());
         try (Writer writer = new FileWriter(file)) {
             for (ContactData contact : contacts) {
-                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstName(), contact.getLastName(),
+                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstName(), contact.getLastName(),
                         contact.getNickName(), contact.getMobilePhone(), contact.getEmail(), contact.getBday(),
-                        contact.getBmonth(), contact.getByYear(), contact.getGroup()));
+                        contact.getBmonth(), contact.getByYear(), contact.getHomePhone(), contact.getWorkPhone()));
             }
         }
     }
@@ -85,7 +85,7 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstName(String.format("Name %s",i)).withLastName(String.format("Surname %s",i))
                     .withNickName(String.format("TrueNick %s", i)).withMobile(String.format("8(908)770-52-2%s",(int) (i % 10))).withEmail(String.format("test%s@mail.ru", i)).withBday(i % 30 + 1)
-                    .withBmonth("April").withByYear((1955 + i)).withGroup("test1"));
+                    .withBmonth("April").withByYear((1955 + i)).withHome(String.format("8(904)111-51-2%s",(int) (i % 10))).withWork(String.format("8(900)000-01-2%s",(int) (i % 10))));
         }
         return contacts;
     }

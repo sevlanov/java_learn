@@ -14,6 +14,8 @@ import org.openqa.selenium.logging.*;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -44,6 +46,33 @@ public class LoadMeter {
 
     WebDriver wd;
 
+    public WebElement get_clear_browsing_button(WebDriver driver) {
+        //""Find the "CLEAR BROWSING BUTTON" on the Chrome settings page."""
+        return driver.findElement(By.cssSelector("* /deep/ #clearBrowsingDataConfirm"));
+    }
+
+
+    public void clear_cache(WebDriver driver) {
+        // default timeout = 60 second
+        clear_cache(driver, 60);
+    }
+
+    public void clear_cache(WebDriver driver, long timeout) {
+        //"" "Clear the cookies and cache for the ChromeDriver instance." ""
+        // #navigate to the settings page
+        driver.get("chrome://settings/clearBrowserData");
+
+        //#wait for the button to appear
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.elementToBeClickable(get_clear_browsing_button(driver)));
+
+        //#click the button to clear the cache
+        get_clear_browsing_button(driver).click();
+
+        //#wait for the button to be gone before returning
+        wait.until(ExpectedConditions.stalenessOf(get_clear_browsing_button(driver)));
+    }
+
     @Test(enabled = true)
     public void loadTime() throws IOException {
 
@@ -70,24 +99,60 @@ public class LoadMeter {
             wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
         } else if (Objects.equals(browser, BrowserType.CHROME)) {
             wd = new ChromeDriver(desiredCapabilities);
+            clear_cache(wd); // chrome cache clear!!!!!
         } else if (Objects.equals(browser, BrowserType.IE)) {
             wd = new InternetExplorerDriver( desiredCapabilities);
         }
 
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         long startTime = System.currentTimeMillis();
-        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx");
+        //wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx");
+
+
+        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx?histKey=71804479&newWindow=true&etn=lead&pagetype=entityrecord&navbar=off&extraqs=#384151359");
+
+        String st="display: block";
+        wd.switchTo().frame("contentIFrame0");
+        //wd.switchTo().frame("IFRAME_LegalCustomerSearchArea");
+
+
+        WebElement dynamicElement = wd.findElement(By.id("containerLoadingProgress"));
+        st = dynamicElement.getAttribute("style");
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd_HH:mm:ss.SSS")) + st);
+        st = "";
+        st = dynamicElement.getAttribute("style");
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd_HH:mm:ss.SSS")) + st);
+        st = "";
+        (new WebDriverWait(wd, 60)).until(ExpectedConditions.invisibilityOf(dynamicElement));
+                        //.attributeContains(By.id("containerLoadingProgress"), ) .presenceOfElementLocated(By.id("dynamicElement_id")));
+        st = dynamicElement.getAttribute("style");
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd_HH:mm:ss.SSS")) + st);
+        /*
+        while (st.contains("display: block")) {
+            st = wd.findElement(By.id("containerLoadingProgress")).getAttribute("style"); //Страница создание ПК
+            //display: block; text-align: center; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; z-index: 101; background-color: white;
+            System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYYMMdd_HHmm")) + st);
+
+        }
+        */
+
+        //wd.switchTo().frame("contentIFrame0");
+        //wd.switchTo().frame("IFRAME_LegalCustomerSearchArea");
+        //st = wd.findElement(By.id("processingDialog")).getAttribute("style"); //Страница главная-поиск
+        System.out.println(st);
+
+        wd.switchTo().defaultContent();
 
         long timeSpent = System.currentTimeMillis() - startTime;
 
        // wd.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-        wd.switchTo().frame("contentIFrame0");
+     /*   wd.switchTo().frame("contentIFrame0");
         wd.switchTo().frame("IFRAME_LegalCustomerSearchArea");
        // wd.findElement(By.id("NameOnLegalCustomerSearchViewportTextField-inputEl")).sendKeys("Бора-Бора");
        // wd.findElement(By.id("SearchOnLegalCustomerSearchViewportButton")).click();
         String str = wd.findElement(By.id("button-1046")).getText();
         System.out.println(str);
-
+*/
         long timeSpentEl = System.currentTimeMillis() - startTime;
 
         File file = new File(String.format("log/log%s.txt", LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYYMMdd_HHmm"))));
@@ -125,7 +190,7 @@ public class LoadMeter {
             writer.write("Time: " + String.format("%tF %<tT.%<tL", logEntry.getTimestamp() ) + "(" + logEntry.getTimestamp() + ") Log: " + logEntry.getMessage() + "\n");
         }*/
         writer.write("Time load " + timeSpent + "\n");
-        writer.write("Time load " + str + ": " + timeSpentEl + "\n");
+      //  writer.write("Time load " + str + ": " + timeSpentEl + "\n");
         writer.close();
 
         logEntries = loggs.get(LogType.PERFORMANCE);
@@ -139,7 +204,7 @@ public class LoadMeter {
         writerPerf.write("Log1 start\n");
         writerPerf.write(logEntries.getAll().toString().replaceAll("\\[","\n["));// .stream().collect(Collectors.toList()).toString());
         writerPerf.write("Time load " + timeSpent + "\n");
-        writerPerf.write("Time load " + str + ": " + timeSpentEl + "\n");
+      //  writerPerf.write("Time load " + str + ": " + timeSpentEl + "\n");
         writerPerf.close();
 
         wd.close();
@@ -252,7 +317,8 @@ public class LoadMeter {
         ieCapabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
         ieCapabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);*/
         wd = new InternetExplorerDriver(ieCapabilities);
-        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx?histKey=17464702&newWindow=true&etn=email&pagetype=entityrecord&navbar=off&id=7484ec13-88b5-e711-80e8-001dd8b71c7e&extraqs=#960040699");
+        wd.get("http://t2ru-crmfe-tst.corp.tele2.ru/");
+        /*
         //wd.findElement(By.id("button-1023")).sendKeys(org.openqa.selenium.Keys.CONTROL);
         try{
             Thread.sleep(500);
@@ -310,6 +376,7 @@ public class LoadMeter {
 
       //  System.out.println(wd.findElement(By.id("button-1023")).getText());
       //  wd.close();
+
     }
 
     @Test(enabled = false)

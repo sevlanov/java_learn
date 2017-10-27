@@ -25,14 +25,21 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("nickname"), contactData.getNickName());
         type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
-        attach(By.name("photo"), contactData.getPhoto());
+        if (contactData.getPhoto() != null) {
+            attach(By.name("photo"), contactData.getPhoto());
+        }
 
         new Select(wd.findElement(By.name("bday"))).selectByVisibleText(String.valueOf(contactData.getBday()));
         new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
         type(By.name("byear"), String.valueOf(contactData.getByYear()));
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0 ) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }

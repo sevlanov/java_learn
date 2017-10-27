@@ -4,6 +4,7 @@ package ru.stqa.learn.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.learn.addressbook.model.ContactData;
+import ru.stqa.learn.addressbook.model.Groups;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -17,9 +18,10 @@ public class ContactEmailTests extends TestBase {
     public void ensurePrecondition() {
         app.goTo().contactPage();
         if (app.contact().all().size() == 0) {
+            Groups groups = app.db().groups();
             app.contact().create(new ContactData().withFirstName("Name").withLastName("Surname")
                     .withNickName("TrueNick").withMobile("8(908)778-80-25").withEmail("test@mail.ru").withBday(11)
-                    .withBmonth("April").withByYear(1955).withGroup("test1").withAddress("test Address"), true);
+                    .withBmonth("April").withByYear(1955).inGroup(groups.iterator().next()).withAddress("test Address"), true);
         }
     }
 

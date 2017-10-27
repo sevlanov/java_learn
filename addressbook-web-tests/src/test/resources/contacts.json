@@ -3,33 +3,39 @@
     "firstName": "Name 0",
     "lastName": "Surname 0",
     "nickName": "TrueNick 0",
+    "homePhone": "8(904)111-51-20",
     "mobilePhone": "8(908)770-52-20",
+    "workPhone": "8(900)000-01-20",
     "email": "test0@mail.ru",
     "bday": 1,
     "bmonth": "April",
     "byYear": 1955,
-    "group": "test1"
+    "groups": []
   },
   {
     "firstName": "Name 1",
     "lastName": "Surname 1",
     "nickName": "TrueNick 1",
+    "homePhone": "8(904)111-51-21",
     "mobilePhone": "8(908)770-52-21",
+    "workPhone": "8(900)000-01-21",
     "email": "test1@mail.ru",
     "bday": 2,
     "bmonth": "April",
     "byYear": 1956,
-    "group": "test1"
+    "groups": []
   },
   {
     "firstName": "Name 2",
     "lastName": "Surname 2",
     "nickName": "TrueNick 2",
+    "homePhone": "8(904)111-51-22",
     "mobilePhone": "8(908)770-52-22",
+    "workPhone": "8(900)000-01-22",
     "email": "test2@mail.ru",
     "bday": 3,
     "bmonth": "April",
     "byYear": 1957,
-    "group": "test1"
+    "groups": []
   }
 ]
