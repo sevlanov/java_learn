@@ -7,8 +7,6 @@ import ru.stqa.learn.addressbook.model.ContactData;
 import ru.stqa.learn.addressbook.model.Contacts;
 import ru.stqa.learn.addressbook.model.Groups;
 
-import java.io.File;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,7 +31,7 @@ public class ContactDeletionTests extends TestBase {
         app.contact().delete(deletedContact);
         Assert.assertEquals(app.contact().count(), before.size() - 1);
         Contacts after = app.db().contacts();
-        assertThat(after, equalTo(before.whithout(deletedContact)));
+        assertThat(after, equalTo(before.without(deletedContact)));
         verifyContactListInUI();
     }
 

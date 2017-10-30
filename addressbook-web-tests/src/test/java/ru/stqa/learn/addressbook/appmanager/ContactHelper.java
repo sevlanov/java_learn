@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.learn.addressbook.model.ContactData;
 import ru.stqa.learn.addressbook.model.Contacts;
+import ru.stqa.learn.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -60,6 +61,7 @@ public class ContactHelper extends HelperBase {
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
+
     public void deleteSelectedContacts() {
         click(By.xpath("//input[@value=\"Delete\"]"));
     }
@@ -78,7 +80,12 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.xpath("//input[@value=\"Update\"]"));
     }
-
+    public void submitContactToGroup() {
+        click(By.xpath("//input[@value=\"Add to\"]"));
+    }
+    public void removeContactFromGroup() {
+        click(By.xpath("//input[@name=\"remove\"]"));
+    }
     public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationById(contact.getId());
         String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -122,6 +129,22 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
+    public void groupAddToContact(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+        submitContactToGroup();
+        contactCache = null;
+        returnToContactPage();
+    }
+
+    public void groupDeleteFromContact(ContactData contact, GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(group.getId()));
+        selectContactById(contact.getId());
+        removeContactFromGroup();
+        contactCache = null;
+        returnToContactPage();
+    }
+
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -151,5 +174,7 @@ public class ContactHelper extends HelperBase {
         }
         return new Contacts(contactCache);
     }
+
+
 
 }
