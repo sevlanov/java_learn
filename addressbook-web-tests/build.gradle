@@ -33,10 +33,7 @@ task testGroups(type: Test) {
     }
 }
 task testContacts(type: Test) {
-    if (executable == java9.java) {
-        jvmArgs += ['--add-opens', 'java.base/java.lang=ALL-UNNAMED']
-        jvmArgs += ['--add-modules', 'java.se.ee']
-    }
+
     useTestNG {
         suites 'src/test/resources/testng-contacts.xml'
     }
