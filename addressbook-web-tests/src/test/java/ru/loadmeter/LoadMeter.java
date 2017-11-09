@@ -2,10 +2,7 @@ package ru.loadmeter;
 
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinUser;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -71,6 +68,19 @@ public class LoadMeter {
 
         //#wait for the button to be gone before returning
         wait.until(ExpectedConditions.stalenessOf(get_clear_browsing_button(driver)));
+    }
+    @Test
+    public void testLogin() { //https://kreisfahrer.gitbooks.io/selenium-webdriver/content/selenium_webdriver_testirovanie_na_mobilnih_brauzerah/navigation_timing_api.html
+        //время загрузки страницы с использованием js
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://t2ru-crmfe-tst.corp.tele2.ru/Tele2/main.aspx?histKey=71804479&newWindow=true&etn=lead&pagetype=entityrecord&navbar=off&extraqs=#384151359");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        // Получаем время Load Event End (окончание загрузки страниы)
+        long loadEventEnd = (Long) js.executeScript("return window.performance.timing.loadEventEnd;");
+        // Получаем Navigation Event Start (начало перехода)
+        long navigationStart = (Long) js.executeScript("return window.performance.timing.navigationStart;");
+        // Разница между Load Event End и Navigation Event Start - это время загрузки страницы
+        System.out.println("Page Load Time is " + (loadEventEnd - navigationStart)/1000 + " seconds.");
     }
 
     @Test(enabled = true)
