@@ -15,6 +15,7 @@ dependencies {
 
     compile 'mysql:mysql-connector-java:8.0.8-dmr'
     compile 'org.hibernate:hibernate-core:5.2.11.Final'
+    compile 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
 }
 
 test {

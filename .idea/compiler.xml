@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="addressbook-web-tests_main" target="1.8" />
       <module name="addressbook-web-tests_test" target="1.8" />
+      <module name="github-sample_main" target="1.8" />
+      <module name="github-sample_test" target="1.8" />
       <module name="java_learn-sandbox_main" target="1.8" />
       <module name="java_learn-sandbox_test" target="1.8" />
       <module name="mantis-tests_main" target="1.8" />
       <module name="mantis-tests_test" target="1.8" />
+      <module name="rest-sample_main" target="1.8" />
+      <module name="rest-sample_test" target="1.8" />
+      <module name="soap-sample_main" target="1.8" />
+      <module name="soap-sample_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

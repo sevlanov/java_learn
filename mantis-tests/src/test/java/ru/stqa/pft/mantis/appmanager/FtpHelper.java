@@ -29,7 +29,7 @@ public class FtpHelper {
         ftp.connect(app.getProperty("ftp.host"));
         ftp.login(app.getProperty("ftp.login"), app.getProperty("ftp.password"));
         ftp.deleteFile(backup);
-        ftp.rename(target,backup);
+        ftp.rename(backup, target);
         ftp.disconnect();
     }
 }
