@@ -1,16 +1,14 @@
 package ru.stqa.learn.addressbook.model;
 
-import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
-import sun.security.util.Length;
 
 import javax.persistence.*;
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
