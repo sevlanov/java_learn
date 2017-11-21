@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.learn.sandbox.PrimeTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-11-21T12:07:05" hostname="WSRU-CRM-008" time="5.064">
+  <properties/>
+  <testcase name="testNonPrime" classname="ru.stqa.learn.sandbox.PrimeTests" time="0.0"/>
+  <testcase name="testPrime" classname="ru.stqa.learn.sandbox.PrimeTests" time="5.063"/>
+  <testcase name="testPrimeFast" classname="ru.stqa.learn.sandbox.PrimeTests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
