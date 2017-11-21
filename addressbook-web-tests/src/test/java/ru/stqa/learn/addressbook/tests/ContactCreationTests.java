@@ -83,7 +83,8 @@ public class ContactCreationTests extends TestBase {
         app.contact().create(contact, true);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contacts();
-        contact.withFirstName("Name"); /* Изменяем имя в соответствии с логикой приложения: "удаление символа ' при соранении имени" */
+        contact.withFirstName("Name");
+
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
