@@ -7,10 +7,12 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -37,19 +39,24 @@ public class ApplicationManager {
 
         dbHelper = new DbHelper();
 
-        if (Objects.equals(browser, BrowserType.FIREFOX)) {
-            wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-        } else if (Objects.equals(browser, BrowserType.CHROME)) {
-            wd = new ChromeDriver();
-        } else if (Objects.equals(browser, BrowserType.IE)) {
-            DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-            ieCapabilities.setCapability(
-                    InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
-                    true
-            );
-            wd = new InternetExplorerDriver(ieCapabilities);
+        if ("".equals(properties.getProperty("selenium.server"))) {
+            if (Objects.equals(browser, BrowserType.FIREFOX)) {
+                wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
+            } else if (Objects.equals(browser, BrowserType.CHROME)) {
+                wd = new ChromeDriver();
+            } else if (Objects.equals(browser, BrowserType.IE)) {
+                DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+                ieCapabilities.setCapability(
+                        InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
+                        true
+                );
+                wd = new InternetExplorerDriver(ieCapabilities);
+            }
+        } else {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(browser);
+            wd = new RemoteWebDriver(new URL (properties.getProperty("selenium.server")), capabilities);
         }
-
         wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         wd.get(properties.getProperty("web.baseUrl")); //http://localhost/addressbook");
         groupHelper = new GroupHelper(wd);
