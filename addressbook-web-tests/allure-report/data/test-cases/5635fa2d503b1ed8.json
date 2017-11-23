@@ -1,0 +1,134 @@
+{
+  "uid" : "5635fa2d503b1ed8",
+  "name" : "testContactDeletion",
+  "fullName" : "ru.stqa.learn.addressbook.tests.ContactDeletionTests.testContactDeletion",
+  "historyId" : "80a4db9271bdb17e062b5eac477b610b",
+  "time" : {
+    "start" : 1511360940380,
+    "stop" : 1511360943948,
+    "duration" : 3568
+  },
+  "status" : "passed",
+  "statusDetails" : {
+    "flaky" : false
+  },
+  "beforeStages" : [ {
+    "name" : "ensurePrecondition",
+    "time" : {
+      "start" : 1511360939805,
+      "stop" : 1511360940014,
+      "duration" : 209
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "logTestStart",
+    "time" : {
+      "start" : 1511360939750,
+      "stop" : 1511360939750,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "setUp",
+    "time" : {
+      "start" : 1511360932302,
+      "stop" : 1511360939736,
+      "duration" : 7434
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "logTestStop",
+    "time" : {
+      "start" : 1511360943968,
+      "stop" : 1511360943968,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "tearDown",
+    "time" : {
+      "start" : 1511360943990,
+      "stop" : 1511360944765,
+      "duration" : 775
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "ru.stqa.learn.addressbook.tests.ContactDeletionTests"
+  }, {
+    "name" : "testClass",
+    "value" : "ru.stqa.learn.addressbook.tests.ContactDeletionTests"
+  }, {
+    "name" : "testMethod",
+    "value" : "testContactDeletion"
+  }, {
+    "name" : "parentSuite",
+    "value" : "Default Suite"
+  }, {
+    "name" : "suite",
+    "value" : "sandbox"
+  }, {
+    "name" : "subSuite",
+    "value" : "ru.stqa.learn.addressbook.tests.ContactDeletionTests"
+  }, {
+    "name" : "host",
+    "value" : "WSRU-CRM-008"
+  }, {
+    "name" : "thread",
+    "value" : "16292@WSRU-CRM-008.main(1)"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "extra" : {
+    "tags" : [ ]
+  },
+  "source" : "5635fa2d503b1ed8.json",
+  "statusMessage" : {
+    "present" : false
+  },
+  "statusDetailsSafe" : {
+    "flaky" : false
+  },
+  "parameterValues" : [ ]
+}

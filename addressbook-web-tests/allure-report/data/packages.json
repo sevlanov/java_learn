@@ -1,0 +1,41 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "ru.stqa.learn.addressbook.tests",
+    "children" : [ {
+      "name" : "ContactDeletionTests",
+      "children" : [ {
+        "name" : "testContactDeletion",
+        "uid" : "73d04972a4dc8af4",
+        "parentUid" : "e90ae2bb2a7cf2c184fb66d66397c692",
+        "status" : "passed",
+        "time" : {
+          "start" : 1511361240069,
+          "stop" : 1511361243590,
+          "duration" : 3521
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "e90ae2bb2a7cf2c184fb66d66397c692"
+    }, {
+      "name" : "GroupModificationTests",
+      "children" : [ {
+        "name" : "testGroupModification",
+        "uid" : "22dfd5425a814a1c",
+        "parentUid" : "dd071303b4a70c7b8a9c113293760e83",
+        "status" : "failed",
+        "time" : {
+          "start" : 1511362204358,
+          "stop" : 1511362205810,
+          "duration" : 1452
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "dd071303b4a70c7b8a9c113293760e83"
+    } ],
+    "uid" : "ru.stqa.learn.addressbook.tests"
+  } ]
+}

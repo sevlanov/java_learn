@@ -1,5 +1,8 @@
 package ru.stqa.learn.addressbook.appmanager;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,13 +22,13 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     private final Properties properties;
-    WebDriver wd;
+    private String browser;
+    private WebDriver wd;
 
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
     private ContactHelper contactHelper;
-    private String browser;
     private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
@@ -55,6 +58,7 @@ public class ApplicationManager {
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
+            capabilities.setPlatform(Platform.fromString(System.getProperty("platform","win7")));
             wd = new RemoteWebDriver(new URL (properties.getProperty("selenium.server")), capabilities);
         }
         wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -86,5 +90,9 @@ public class ApplicationManager {
 
     public DbHelper db() {
         return dbHelper;
+    }
+
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
     }
 }

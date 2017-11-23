@@ -3,6 +3,10 @@ apply plugin: 'java'
 repositories {
     mavenCentral()
 }
+/*
+configurations {
+    agent
+}*/
 
 dependencies {
     compile 'org.testng:testng:6.11'
@@ -14,17 +18,23 @@ dependencies {
     compile 'ch.qos.logback:logback-classic:1.2.3'
     compile 'mysql:mysql-connector-java:8.0.8-dmr'
     compile 'org.hibernate:hibernate-core:5.2.11.Final'
-
+    compile 'javax.xml.bind:jaxb-api:2.3.0'
+    compile 'io.qameta.allure:allure-testng:2.0-BETA21'
+    compile 'io.qameta.allure:allure-plugin-api:2.4.1'
+    //compile 'io.qameta.allure:allure-gradle:2.3'
 }
 
 task testGroups(type: Test) {
-
+    //apply plugin: 'io.qameta.allure'
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
@@ -32,14 +42,22 @@ task testGroups(type: Test) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
-task testContacts(type: Test) {
+/*
+testGroups.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}*/
 
+task testContacts(type: Test) {
+   // apply plugin: 'io.qameta.allure'
     useTestNG {
         suites 'src/test/resources/testng-contacts.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
@@ -47,3 +65,8 @@ task testContacts(type: Test) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
+/*
+testContacts.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+*/

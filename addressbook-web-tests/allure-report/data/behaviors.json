@@ -1,0 +1,29 @@
+{
+  "uid" : "b1a8273437954620fa374b796ffaacdd",
+  "name" : "behaviors",
+  "children" : [ {
+    "name" : "testContactDeletion",
+    "uid" : "73d04972a4dc8af4",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1511361240069,
+      "stop" : 1511361243590,
+      "duration" : 3521
+    },
+    "flaky" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "testGroupModification",
+    "uid" : "22dfd5425a814a1c",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1511362204358,
+      "stop" : 1511362205810,
+      "duration" : 1452
+    },
+    "flaky" : false,
+    "parameters" : [ ]
+  } ]
+}

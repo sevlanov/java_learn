@@ -1,0 +1,53 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "Default Suite",
+    "children" : [ {
+      "name" : "sandbox",
+      "children" : [ {
+        "name" : "ru.stqa.learn.addressbook.tests.ContactDeletionTests",
+        "children" : [ {
+          "name" : "testContactDeletion",
+          "uid" : "73d04972a4dc8af4",
+          "parentUid" : "18225fd212d6911c5f0da3041ce1de3a",
+          "status" : "passed",
+          "time" : {
+            "start" : 1511361240069,
+            "stop" : 1511361243590,
+            "duration" : 3521
+          },
+          "flaky" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "18225fd212d6911c5f0da3041ce1de3a"
+      } ],
+      "uid" : "54666b1095799476f89cde7f846b0681"
+    } ],
+    "uid" : "8399274b4bb69ec8699907dd6ef7de4e"
+  }, {
+    "name" : "Suite1",
+    "children" : [ {
+      "name" : "Groups",
+      "children" : [ {
+        "name" : "ru.stqa.learn.addressbook.tests.GroupModificationTests",
+        "children" : [ {
+          "name" : "testGroupModification",
+          "uid" : "22dfd5425a814a1c",
+          "parentUid" : "a1ca2887904d981c8dd98f4364c3ec61",
+          "status" : "failed",
+          "time" : {
+            "start" : 1511362204358,
+            "stop" : 1511362205810,
+            "duration" : 1452
+          },
+          "flaky" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "a1ca2887904d981c8dd98f4364c3ec61"
+      } ],
+      "uid" : "f0a14a12ec17b7204a51bfd5336adeae"
+    } ],
+    "uid" : "1b55da8b4eccbbb6df84e16f476662eb"
+  } ]
+}

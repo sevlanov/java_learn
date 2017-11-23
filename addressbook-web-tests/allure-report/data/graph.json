@@ -1,0 +1,21 @@
+[ {
+  "uid" : "73d04972a4dc8af4",
+  "name" : "testContactDeletion",
+  "time" : {
+    "start" : 1511361240069,
+    "stop" : 1511361243590,
+    "duration" : 3521
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "22dfd5425a814a1c",
+  "name" : "testGroupModification",
+  "time" : {
+    "start" : 1511362204358,
+    "stop" : 1511362205810,
+    "duration" : 1452
+  },
+  "status" : "failed",
+  "severity" : "normal"
+} ]

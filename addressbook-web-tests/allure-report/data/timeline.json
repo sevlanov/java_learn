@@ -1,0 +1,41 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "WSRU-CRM-008",
+    "children" : [ {
+      "name" : "15124@WSRU-CRM-008.main(1)",
+      "children" : [ {
+        "name" : "testContactDeletion",
+        "uid" : "73d04972a4dc8af4",
+        "parentUid" : "d3e33c629ede613c7d07b193bc86aeff",
+        "status" : "passed",
+        "time" : {
+          "start" : 1511361240069,
+          "stop" : 1511361243590,
+          "duration" : 3521
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "d3e33c629ede613c7d07b193bc86aeff"
+    }, {
+      "name" : "14692@WSRU-CRM-008.Test worker(11)",
+      "children" : [ {
+        "name" : "testGroupModification",
+        "uid" : "22dfd5425a814a1c",
+        "parentUid" : "fcd4161c92d6334285f18cec8ef41de0",
+        "status" : "failed",
+        "time" : {
+          "start" : 1511362204358,
+          "stop" : 1511362205810,
+          "duration" : 1452
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "fcd4161c92d6334285f18cec8ef41de0"
+    } ],
+    "uid" : "b83040fcf4fad4040b8c4802a03ea433"
+  } ]
+}
