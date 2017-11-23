@@ -3,10 +3,6 @@ apply plugin: 'java'
 repositories {
     mavenCentral()
 }
-/*
-configurations {
-    agent
-}*/
 
 dependencies {
     compile 'org.testng:testng:6.11'
@@ -21,11 +17,9 @@ dependencies {
     compile 'javax.xml.bind:jaxb-api:2.3.0'
     compile 'io.qameta.allure:allure-testng:2.0-BETA21'
     compile 'io.qameta.allure:allure-plugin-api:2.4.1'
-    //compile 'io.qameta.allure:allure-gradle:2.3'
 }
 
 task testGroups(type: Test) {
-    //apply plugin: 'io.qameta.allure'
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }
@@ -42,13 +36,8 @@ task testGroups(type: Test) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
-/*
-testGroups.doFirst {
-    jvmArgs "-javaagent:${configurations.agent.singleFile}"
-}*/
 
 task testContacts(type: Test) {
-   // apply plugin: 'io.qameta.allure'
     useTestNG {
         suites 'src/test/resources/testng-contacts.xml'
     }
@@ -65,8 +54,3 @@ task testContacts(type: Test) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
-/*
-testContacts.doFirst {
-    jvmArgs "-javaagent:${configurations.agent.singleFile}"
-}
-*/
