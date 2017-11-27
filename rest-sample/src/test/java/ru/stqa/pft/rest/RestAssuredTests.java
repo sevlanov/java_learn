@@ -45,8 +45,8 @@ public class RestAssuredTests {
     private Set<Issue> getIssues() throws IOException {
             String proxyUsername = "";
             String proxyPassword = "";
-            String proxyHost = "proxy.corp.tele2.ru";
-            int proxyPort = 8080;
+            String proxyHost = "";
+            int proxyPort = 0;
 
         System.getProperties().put("http.proxyHost", proxyHost);
         System.getProperties().put("http.proxyPort", proxyPort);

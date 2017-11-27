@@ -28,8 +28,8 @@ public class RestTests {
     }
 
     private Set<Issue> getIssues() throws IOException {
-        String proxyHost = "proxy.corp.tele2.ru";
-        int proxyPort = 8080;
+        String proxyHost = "";
+        int proxyPort = 0;
         String json =getExecutor()
                 .execute(Request.Get("http://demo.bugify.com/api/issues.json").viaProxy(new HttpHost(proxyHost, proxyPort)))
                 .returnContent().asString();
@@ -40,8 +40,8 @@ public class RestTests {
 
     private Executor getExecutor() throws IOException {
 
-        String proxyHost = "proxy.corp.tele2.ru";
-        int proxyPort = 8080;
+        String proxyHost = "";
+        int proxyPort = ;
         return Executor.newInstance()
                 .auth(new HttpHost(proxyHost, proxyPort),"", "")
                 .authPreemptiveProxy(new HttpHost(proxyHost, proxyPort))
