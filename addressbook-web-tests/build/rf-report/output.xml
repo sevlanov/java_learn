@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.2 (Jython 2.7.0 on java1.8.0_144)" generated="20171123 17:39:48.688">
+<suite source="C:\Dev\java_learn\addressbook-web-tests\src\test\resources\rf" name="Rf" id="s1">
+<suite source="C:\Dev\java_learn\addressbook-web-tests\src\test\resources\rf\groups.robot" name="Groups" id="s1-s1">
+<kw type="setup" library="ru.stqa.learn.addressbook.rf.AddressbookKeywords" name="Init Application Manager">
+<msg level="INFO" timestamp="20171123 17:39:57.936">17:39:49.111 [MainThread] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.2.11.Final}
+17:39:49.113 [MainThread] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+17:39:49.345 [MainThread] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+17:39:49.730 [MainThread] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+17:39:49.737 [MainThread] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/addressbook?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC]
+17:39:49.738 [MainThread] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=root, password=}
+17:39:49.738 [MainThread] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+17:39:49.741 [MainThread] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 1 (min=1)
+17:39:49.957 [MainThread] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+17:39:50.685 [MainThread] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@75063bd0] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.</msg>
+<msg level="INFO" timestamp="20171123 17:39:57.941">Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+Starting ChromeDriver 2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a) on port 9690
+Only local connections are allowed.
+��� 23, 2017 5:39:54 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS</msg>
+<status endtime="20171123 17:39:57.944" starttime="20171123 17:39:48.986" status="PASS"></status>
+</kw>
+<test name="Can Create Group With Valid Data" id="s1-s1-t1">
+<kw library="ru.stqa.learn.addressbook.rf.AddressbookKeywords" name="Get Group Count">
+<assign>
+<var>${old_count}</var>
+</assign>
+<msg level="INFO" timestamp="20171123 17:39:58.192">${old_count} = 15</msg>
+<status endtime="20171123 17:39:58.192" starttime="20171123 17:39:57.954" status="PASS"></status>
+</kw>
+<kw library="ru.stqa.learn.addressbook.rf.AddressbookKeywords" name="Create Group">
+<arguments>
+<arg>test name</arg>
+<arg>test header</arg>
+<arg>test footer</arg>
+</arguments>
+<status endtime="20171123 17:39:59.232" starttime="20171123 17:39:58.193" status="PASS"></status>
+</kw>
+<kw library="ru.stqa.learn.addressbook.rf.AddressbookKeywords" name="Get Group Count">
+<assign>
+<var>${new_count}</var>
+</assign>
+<msg level="INFO" timestamp="20171123 17:39:59.365">${new_count} = 16</msg>
+<status endtime="20171123 17:39:59.366" starttime="20171123 17:39:59.235" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Evaluate">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>${old_count} + 1</arg>
+</arguments>
+<assign>
+<var>${expected_count}</var>
+</assign>
+<msg level="INFO" timestamp="20171123 17:39:59.379">${expected_count} = 16</msg>
+<status endtime="20171123 17:39:59.380" starttime="20171123 17:39:59.368" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal As Integers">
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<arguments>
+<arg>${new_count}</arg>
+<arg>${expected_count}</arg>
+</arguments>
+<status endtime="20171123 17:39:59.387" starttime="20171123 17:39:59.382" status="PASS"></status>
+</kw>
+<status critical="yes" endtime="20171123 17:39:59.388" starttime="20171123 17:39:57.946" status="PASS"></status>
+</test>
+<kw type="teardown" library="ru.stqa.learn.addressbook.rf.AddressbookKeywords" name="Stop Application Manager">
+<status endtime="20171123 17:40:00.456" starttime="20171123 17:39:59.396" status="PASS"></status>
+</kw>
+<status endtime="20171123 17:40:00.459" starttime="20171123 17:39:48.935" status="PASS"></status>
+</suite>
+<status endtime="20171123 17:40:00.490" starttime="20171123 17:39:48.700" status="PASS"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" name="Rf" id="s1">Rf</stat>
+<stat pass="1" fail="0" name="Groups" id="s1-s1">Rf.Groups</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

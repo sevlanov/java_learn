@@ -17,6 +17,10 @@ dependencies {
     compile 'javax.xml.bind:jaxb-api:2.3.0'
     compile 'io.qameta.allure:allure-testng:2.0-BETA21'
     compile 'io.qameta.allure:allure-plugin-api:2.4.1'
+    compile 'org.robotframework:robotframework:3.0.2'
+    compile 'io.cucumber:cucumber-java:2.1.0'
+    compile 'io.cucumber:cucumber-testng:2.1.0'
+
 }
 
 task testGroups(type: Test) {
@@ -53,4 +57,11 @@ task testContacts(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+}
+
+task rf(type: JavaExec) {
+    main = 'org.robotframework.RobotFramework'
+    classpath = sourceSets.test.runtimeClasspath
+    args '--outputdir', 'build/rf-report'
+    args 'src/test/resources/rf'
 }
