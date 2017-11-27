@@ -60,7 +60,7 @@ public class RestAssuredTests {
 
         String json = RestAssured
                 .get("http://demo.bugify.com/api/issues.json").asString();
-
+//1
         JsonElement parsed = new JsonParser().parse(json).getAsJsonObject();
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
